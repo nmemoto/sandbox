@@ -27,6 +27,7 @@ RUN ./configure --with-tcsetpgrp && make && make install
 
 # prezto
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+RUN yum install -y tmux
 COPY add_files/files/.z* /root/
 
 # zsh setting
