@@ -26,8 +26,8 @@ WORKDIR zsh-${ZSH_VERSION}
 RUN ./configure --with-tcsetpgrp && make && make install
 
 # prezto
-COPY add_files/scripts/prezto.zsh /tmp/
-RUN /tmp/prezto.zsh
+RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+COPY add_files/files/.z* /root/
 
 # zsh setting
 RUN echo "/usr/local/bin/zsh" >> /etc/shells && \
