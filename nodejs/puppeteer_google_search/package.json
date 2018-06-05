@@ -1,0 +1,14 @@
+{
+  "name": "puppeteer_google_search",
+  "version": "0.0.1",
+  "description": "google search with puppeteer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nmemoto",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^1.4.0"
+  }
+}
