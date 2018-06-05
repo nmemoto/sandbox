@@ -25,6 +25,12 @@ RUN curl -L http://sourceforge.net/projects/zsh/files/zsh/${ZSH_VERSION}/zsh-${Z
 WORKDIR zsh-${ZSH_VERSION}
 RUN ./configure --with-tcsetpgrp && make && make install
 
+# vim install
+WORKDIR /usr/local/src
+RUN git clone https://github.com/vim/vim.git
+WORKDIR vim/src
+RUN make && make install
+
 # prezto
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 RUN yum install -y tmux
@@ -33,6 +39,7 @@ COPY add_files/files/.z* /root/
 # zsh setting
 RUN echo "/usr/local/bin/zsh" >> /etc/shells && \
     chsh -s /usr/local/bin/zsh
+
 
 WORKDIR /
 
