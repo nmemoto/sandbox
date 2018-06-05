@@ -1,7 +1,14 @@
 const puppeteer = require('puppeteer');
 
-const googleSearch =
-(async () => {
+const args = process.argv.filter((value, index) => index > 1)
+
+if (args.length === 0) {
+	console.log("検索ワードを引数に指定してください")
+	console.log("例: node app.js \"google\" \"microsoft\"")
+	return 1
+}
+
+const googleSearch = async (word) => {
   // Viewport
   const width = 1200
   const height = 600
@@ -24,6 +31,11 @@ const googleSearch =
     };
   });
 
-  await page.type("#lst-ib", process.argv[2]);
+  await page.type("#lst-ib", word);
   await page.keyboard.press('Enter');
-})();
+};
+
+
+args.map(word =>
+	googleSearch(word)
+)
