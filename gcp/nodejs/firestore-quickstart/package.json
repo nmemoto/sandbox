@@ -1,0 +1,17 @@
+{
+  "name": "firestore",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "config": "^1.30.0",
+    "firebase": "^5.0.4",
+    "yaml": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
