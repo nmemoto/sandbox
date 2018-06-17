@@ -1,16 +1,6 @@
 const graphql = require('graphql');
-const todoType = require('./todoType')
-
-let database = [
-    {
-      id: 'a',
-      name: 'task1',
-    },
-    {
-      id: 'b',
-      name: 'task2',
-    },
-  ];  
+const todoType = require('./todoType');
+const database = require('../lib/database');
 
 const queryType = new graphql.GraphQLObjectType({
     name: 'Query',
@@ -21,7 +11,7 @@ const queryType = new graphql.GraphQLObjectType({
           id: { type: graphql.GraphQLString }
         },
         resolve: (_, {id}) => {
-          return database.find(data=> data.id === id)
+          return database.find(data => data.id === id)
         }
       },
       listTodos: {
