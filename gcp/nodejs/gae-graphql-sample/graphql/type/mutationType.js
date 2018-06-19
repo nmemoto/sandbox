@@ -1,7 +1,7 @@
 const graphql = require('graphql');
 const todoType = require('./todoType');
 const todoInputType = require('./todoInputType');
-const database = require('../lib/database');
+const database = require('../../lib/database');
 
 const mutationType = new graphql.GraphQLObjectType({
   name: 'Mutation',

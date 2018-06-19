@@ -1,13 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const graphql = require('graphql');
-const queryType = require('./type/queryType')
-const mutationType = require('./type/mutationType')
-
-const schema = new graphql.GraphQLSchema({
-  query: queryType,
-  mutation: mutationType
-});
+const schema = require('./graphql/schema.js');
 
 const app = express();
 app.use('/graphql', graphqlHTTP({

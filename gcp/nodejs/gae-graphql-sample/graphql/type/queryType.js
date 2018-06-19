@@ -1,6 +1,6 @@
 const graphql = require('graphql');
 const todoType = require('./todoType');
-const database = require('../lib/database');
+const database = require('../../lib/database');
 
 const queryType = new graphql.GraphQLObjectType({
     name: 'Query',
