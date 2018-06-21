@@ -15,6 +15,15 @@ const mutationType = new graphql.GraphQLObjectType({
         return TodoService.create(todo)
       }
     },
+    updateTodo: {
+      type: todoType,
+      args: {
+        todo: { type: todoInputType }
+      },
+      resolve: (_, { todo }) => {
+        return TodoService.update(todo)
+      }
+    },
     deleteTodo: {
       type: graphql.GraphQLString,
       args: {

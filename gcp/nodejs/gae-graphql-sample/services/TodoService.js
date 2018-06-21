@@ -17,6 +17,12 @@ class TodoService {
         return todo
     }
 
+    static update(todo) {
+        database = database.filter(data => data.id !== todo.id)
+        database.push(todo)
+        return todo
+    }
+
     static delete(id) {
         database = database.filter(data => data.id !== id) 
         return id
