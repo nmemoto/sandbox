@@ -1,6 +1,6 @@
 const graphql = require('graphql');
 const todoType = require('./todoType');
-const database = require('../../lib/database');
+const TodoService = require('../../services/TodoService');
 
 const queryType = new graphql.GraphQLObjectType({
     name: 'Query',
@@ -11,13 +11,13 @@ const queryType = new graphql.GraphQLObjectType({
           id: { type: graphql.GraphQLString }
         },
         resolve: (_, {id}) => {
-          return database.find(data => data.id === id)
+          return TodoService.findById(id)
         }
       },
       listTodos: {
         type: new graphql.GraphQLList(todoType),
         resolve: () => {
-          return database
+          return TodoService.all()
         }
       }
     }

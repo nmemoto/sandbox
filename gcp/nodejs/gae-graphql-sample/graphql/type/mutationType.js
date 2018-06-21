@@ -1,7 +1,7 @@
 const graphql = require('graphql');
 const todoType = require('./todoType');
 const todoInputType = require('./todoInputType');
-const database = require('../../lib/database');
+const TodoService = require('../../services/TodoService');
 
 const mutationType = new graphql.GraphQLObjectType({
   name: 'Mutation',
@@ -12,8 +12,16 @@ const mutationType = new graphql.GraphQLObjectType({
         todo: { type: todoInputType }
       },
       resolve: (_, { todo }) => {
-        database.push(todo)
-        return todo
+        return TodoService.create(todo)
+      }
+    },
+    deleteTodo: {
+      type: graphql.GraphQLString,
+      args: {
+        id: { type: graphql.GraphQLString }
+      },
+      resolve: (_, { id }) => {
+        return TodoService.delete(id)
       }
     }
   }
