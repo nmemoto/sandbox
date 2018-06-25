@@ -16,8 +16,11 @@ const queryType = new graphql.GraphQLObjectType({
       },
       listTodos: {
         type: new graphql.GraphQLList(todoType),
-        resolve: () => {
-          return TodoService.all()
+        resolve: async () => {
+          return await TodoService.all()
+            .then((result) => {
+              return result
+            })
         }
       }
     }

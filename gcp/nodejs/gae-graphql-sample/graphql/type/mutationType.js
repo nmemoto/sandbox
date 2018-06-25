@@ -1,24 +1,28 @@
 const graphql = require('graphql');
-const todoType = require('./todoType');
-const todoInputType = require('./todoInputType');
+const addTodoInputType = require('./addTodoInputType');
+const updateTodoInputType = require('./updateTodoInputType');
+const firebaseIdType = require('./firebaseIdType');
 const TodoService = require('../../services/TodoService');
 
 const mutationType = new graphql.GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addTodo: {
-      type: todoType,
+      type: firebaseIdType,
       args: {
-        todo: { type: todoInputType }
+        todo: { type: addTodoInputType }
       },
-      resolve: (_, { todo }) => {
-        return TodoService.create(todo)
+      resolve: async (_, { todo }) => {
+        return await TodoService.create(todo)
+          .then(result => {
+            return result
+          })
       }
     },
     updateTodo: {
-      type: todoType,
+      type: graphql.GraphQLString,
       args: {
-        todo: { type: todoInputType }
+        todo: { type: updateTodoInputType }
       },
       resolve: (_, { todo }) => {
         return TodoService.update(todo)

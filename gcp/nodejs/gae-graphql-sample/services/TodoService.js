@@ -1,31 +1,30 @@
-let database = require('../lib/database')
+const { list, find, add, update, remove } = require('../lib/firebase')
 
 class TodoService {
     constructor() {
 
     }
     static all() {
-        return database
-    }
-
-    static findById(id) {
-        return database.find(data => data.id === id)
+        return list('todos')
     }
 
     static create(todo) {
-        database.push(todo)
-        return todo
+        return add('todos', todo)
     }
 
-    static update(todo) {
-        database = database.filter(data => data.id !== todo.id)
-        database.push(todo)
-        return todo
+    static async update(todo) {
+        const curVal = await find('todos', todo.id)
+        let nextVal = { ...todo.data }
+        const updateKeys = Object.keys(curVal).filter(key => curVal[key] !== nextVal[key])
+        const updateVal = updateKeys.reduce((pre, cur)=> { 
+            pre[cur] = nextVal[cur]
+            return pre 
+        }, {})
+        return update('todos', todo.id, updateVal)
     }
 
     static delete(id) {
-        database = database.filter(data => data.id !== id) 
-        return id
+        return remove('todos', id)
     }
 }
 
